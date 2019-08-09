@@ -38,7 +38,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView() {
         web_view.settings.javaScriptEnabled = true
+        web_view.settings.domStorageEnabled = true
+        web_view.webViewClient = WebViewClient()
+        web_view.webChromeClient = WebChromeClient()
         web_view.loadUrl(url)
         supportActionBar?.title = url
+    }
+
+    override fun onBackPressed() {
+        if (web_view.canGoBack())
+            web_view.goBack()
+        else
+            super.onBackPressed()
     }
 }
